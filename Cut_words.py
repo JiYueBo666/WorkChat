@@ -59,7 +59,6 @@ class Words_Analyser:
 
         Args:
             text (str): 待词性标注的文本字符串。
-
         Returns:
             list: 由二元组构成的列表，每个二元组包含单词和其词性。
         """
@@ -72,5 +71,5 @@ class Words_Analyser:
 # 主程序入口
 if __name__ == '__main__':
     words_analyser = Words_Analyser()  # 创建Words_Analyser实例
-    text = "我爱北京天安门，天安门太漂亮了"
+    text = "算了，我学习英语"
     print(words_analyser.words_tagging(text))
