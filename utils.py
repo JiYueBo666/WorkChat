@@ -22,7 +22,6 @@ class entity_extractor:
             raise ValueError("实体词典路径为空")
         if not os.path.exists(self.entity_dict_path):
             raise ValueError("实体词典路径错误")
-
         slot_dict = {}
         with open(self.entity_dict_path, encoding="utf8") as f:
             for line in f:
@@ -84,3 +83,9 @@ def process_file_a_to_b(file_a_path, file_b_path):
                 file_a.write(new_line)
         file_b.close()
     file_a.close()
+
+if __name__ == '__main__':
+    query="画个醋酸"
+    obj= entity_extractor()
+    res= obj.entity_extract(query)
+    print(res)

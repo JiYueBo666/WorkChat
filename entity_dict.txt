@@ -279,6 +279,7 @@
 乙酰丙酸	ChemEntity+++乙酰丙酸
 氯化锰	ChemEntity+++氯化锰
 醋酸甲酯	ChemEntity+++醋酸甲酯
+醋酸	ChemEntity+++醋酸
 苯甲酸甲酯	ChemEntity+++苯甲酸甲酯
 甲基丁炔醇	ChemEntity+++甲基丁炔醇
 硝基苯	ChemEntity+++硝基苯
