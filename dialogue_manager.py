@@ -112,65 +112,7 @@ class DialogueManager:
                     key_num=key[:-1]+str(i)+"%"
                     res[key_num]=value_combination[index][i]
         return res
-    def __replace_token(self,template:str,combination_dict):
-        for key,value in combination_dict.items():
-            template=template.replace(key,value)
-        return template
-    def __expand_templet(self,order,check,cypher,info):
-        #对单条模板，根据抽取到的属性进行扩展，形成列表
-        combinations=self.__get_combinations(check,info)
-        templet_cpyher=[]
-        for combination in combinations:
-            replaced_templet = self.__replace_token(order,combination)
-            replaced_cypher = self.__replace_token(cypher,combination)
-            templet_cpyher.append([replaced_templet,check,replaced_cypher])
-        return templet_cpyher
-    def __expand_question_and_cypher(self,info):
-        templet_cypher_pair=[]
-        for order,check,cypher in self.order_templet:
-            if self.__check_info_valid(info,check):
-                templet_cypher_pair+=self.__expand_templet(order,check,cypher,info)
-        return templet_cypher_pair
-    def __sentence_similarity_function(self,string1,string2):
-        jaccard_distance = len(set(string1) & set(string2)) / len(set(string1) | set(string2))
-        return jaccard_distance
-    def __parse_extract(self,sentence,intent):
-        entitys = self.__get_mention_entitys(sentence)
-        actions = self.__get_mention_actions(sentence)
-        numbers = self.__get_mention_numbers(sentence)
-        positions = self.__get_mention_positions(sentence)
-        return {"%ENT%": entitys,
-                "%ACT%": actions,
-                "%NUM%": numbers,
-                "%POS%": positions}
-    def __get_mention_entitys(self, sentence):
-        return re.findall("|".join(self.entity_set), sentence)
-        # 获取问题中谈到的动作
-    def __get_mention_actions(self, sentence):
-        return re.findall("|".join(self.actions_set), sentence)
-        # 获取问题中谈到的数量
-    def __get_mention_numbers(self, sentence):
-        return re.findall("|".join(self.number_set), sentence)
-        # 获取问题中提到的位置信息
-    def __get_mention_positions(self, sentence):
-        return re.findall("|".join(self.position_set), sentence)
-    #检查槽位值的填充情况
-    def __slot_checker(self):
-        pass
-    #对话状态追踪，判断是否需要跳转到下一个状态
-    def __dialogue_track(self):
-        pass
-    def __transfer_to_json(self,cypher):
-        kv_pairs = cypher.split(',')
-        # 创建一个空字典用于存储键值对
-        data_dict = {}
-        # 遍历键值对列表并填充字典
-        for pair in kv_pairs:
-            key, value = pair.split(':')
-            data_dict[key] = value
-        # 使用json.dumps将字典序列化为JSON字符串
-        # json_str = json.dumps(data_dict, ensure_ascii=False)
-        return  data_dict
+
 
 
 if __name__ == '__main__':
