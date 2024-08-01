@@ -1,7 +1,10 @@
 import jionlp as jio
+from ltp import LTP
 class TextProcessor:
     def __init__(self):
         self.text_helper=jio
+        self.cut_words_helper=LTP()
+        self.cut_words_helper.add_word(word="氧原子", freq =2000)
         pass
     def remove_stopwords(self,text):
         """
@@ -28,11 +31,6 @@ class TextProcessor:
         :return:
         '''
         return self.text_helper.clean_text(text)
-
-
-if __name__ == '__main__':
-    pre_process=TextProcessor()
-    text_analyzer=Words_Analyser()
-    text='<p><br></p>       <p><span>在17日举行的十三届全国人大一次会议记者会上，环境保护部部长李干杰就“打好污染防治攻坚战”相关问题回答记者提问。李干杰表示'
-    text=pre_process.clean_text(text)
-    print(text)
+    def cut_words(self,text):
+        result=self.cut_words_helper.pipeline([text],tasks=['cws','pos'])
+        return result

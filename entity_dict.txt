@@ -1,5 +1,6 @@
 苛化度苛化作用苛化率	ChemEntity+++苛化度苛化作用苛化率
 没食子酸	ChemEntity+++没食子酸
+碳原子	ChemEntity+++碳原子
 奎哪啶红	ChemEntity+++奎哪啶红
 助色团	ChemEntity+++助色团
 单分子反应	ChemEntity+++单分子反应
@@ -25345,7 +25346,6 @@
 成套设备	ChemEntity+++成套设备
 包拆捆机	ChemEntity+++包拆捆机
 底刀床座	ChemEntity+++底刀床座
-苯	ChemEntity+++苯
 棒	ChemEntity+++棒
 生物化学的	ChemEntity+++生物化学的
 生化的生物化学	ChemEntity+++生化的生物化学
@@ -29193,7 +29193,6 @@
 砂磨机	ChemEntity+++砂磨机
 试压泵	ChemEntity+++试压泵
 水镁石	ChemEntity+++水镁石
-碳	ChemEntity+++碳
 透闪石	ChemEntity+++透闪石
 漩涡泵	ChemEntity+++漩涡泵
 杂质泵	ChemEntity+++杂质泵
@@ -36681,6 +36680,7 @@
 氧单质	ChemEntity+++氧单质
 氧代	ChemEntity+++氧代
 氧分子	ChemEntity+++氧分子
+氧原子	ChemEntity+++氧原子
 氧化镍	ChemEntity+++氧化镍
 氧化锡	ChemEntity+++氧化锡
 氧化氯	ChemEntity+++氧化氯
@@ -38068,6 +38068,7 @@
 反应管	ChemEntity+++反应管
 反应温度	ChemEntity+++反应温度
 反应液	ChemEntity+++反应液
+氢原子	ChemEntity+++氢原子
 反应原理	ChemEntity+++反应原理
 反应结束	ChemEntity+++反应结束
 反应活性	ChemEntity+++反应活性

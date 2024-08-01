@@ -1,4 +1,6 @@
 import os
+import Levenshtein
+from concurrent.futures import ThreadPoolExecutor
 class entity_extractor:
     def __init__(self,entity_dict='./entity_dict.txt'):
         self.entity_dict_path= entity_dict
@@ -84,8 +86,18 @@ def process_file_a_to_b(file_a_path, file_b_path):
         file_b.close()
     file_a.close()
 
-if __name__ == '__main__':
-    query="画个醋酸"
-    obj= entity_extractor()
-    res= obj.entity_extract(query)
-    print(res)
+
+def compute_levenshtein_distance(self, input_string, target):
+    """计算并返回输入字符串与目标字符串的编辑距离及目标字符串"""
+    return [Levenshtein.distance(input_string, target), target]
+
+
+def levenshtein_recall(self, user_query, entity_dict,top_n=20):
+    """计算用户查询与混淆列表中词语的编辑距离，并返回编辑距离最小的几个词"""
+    with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
+        # 并行计算编辑距离
+        results = list(executor.map(lambda word: self.compute_levenshtein_distance(user_query, word),entity_dict))
+    # 按编辑距离排序并获取最小的几个
+    top_results = sorted(results, key=lambda x: x[0])[:top_n]
+    # [[distance,word]....]
+    return top_results

@@ -1,25 +1,20 @@
 import re
 from Config import Config
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
 class IntentRecognition:
     '''
     意图识别模块，目前主要依赖于对词典、以及句子分析的识别
     '''
-    def __init__(self,LLM_path=None):
+    def __init__(self,model=None,tokenizer=None):
         self.config=Config()
-        self.model=None
+        if model is not None and tokenizer is not None:
+            self.model=model
+            self.llm_tokenizer=tokenizer
+        elif (model==None and tokenizer is not None) or (model is not None and tokenizer==None):
+            print("模型和分词器需要同时存在")
         #规则
         self.actions_draw=self.config.actions_draw
         self.actions_asking=self.config.actions_asking
-        self.llm_path=LLM_path
-        if self.llm_path is not None:
-            self.model=AutoModelForCausalLM.from_pretrained(
-                self.llm_path,
-                torch_dtype="auto",
-                device_map="auto"
-            )
-            self.llm_tokenizer=AutoTokenizer.from_pretrained(self.llm_path)
     def intent_predict(self,query):
         '''
         意图识别
@@ -32,14 +27,15 @@ class IntentRecognition:
         match_draw=re.search(pattern_draw,query)
         match_asking=re.search(pattern_asking,query)
         if match_draw is not None:
-            return {"code":200,"意图":"绘图"}
+            return {"code":200,"intent":"绘图"}
         elif match_asking is not None:
-            return {"code":200,"意图":"提问"}
+            return {"code":200,"intent":"提问"}
         else:
             if self.model is not None:
+                print("使用大模型进行意图识别")
                 return self.model_predict(query)
             else:
-                return {"code":-1,"意图":"未能识别意图"}
+                return {"code":-1,"intent":"未能识别意图"}
     def model_predict(self,query):
         device = 'cuda' if torch.cuda.is_available() else 'cpu'
         prompt = self.config.intentHelperPrompt
